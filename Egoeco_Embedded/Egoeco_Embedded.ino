@@ -7,10 +7,10 @@
 const int SPI_CS_PIN = 10; // CAN Shield(AS54887CAN)
 MCP_CAN CAN(SPI_CS_PIN);                                    // Set CS pin
 
-//const int BT_RX =  2;
-//const int BT_TX =  3;
+const int BT_RX =  2;
+const int BT_TX =  3;
 // SoftwareSerial(RX, TX) 형식으로 블루투스 모듈과 교차하여 연결
-SoftwareSerial BTSerial(3, 2);
+SoftwareSerial BTSerial(BT_RX, BT_TX);
 
 
 // CAN Msg Define
