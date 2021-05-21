@@ -165,41 +165,31 @@ void setup() {
 
 
 void loop() {
-
-  unsigned char chk = 10;
  
   if(flag_CanRecv) 
   {
     flag_CanRecv = 0;
-
+    //canID_rev = CAN.getCanId();
+       
     // iterate over all pending messages
     // If either the bus is saturated or the MCU is busy,
     // both RX buffers may be in use and reading a single
     // message does not clear the IRQ conditon.
     while (CAN_MSGAVAIL == CAN.checkReceive()) 
     {
-      chk = CAN.readMsgBuf(&can_len, can_revbuf);    
-      if(chk == 0)
+      CAN.readMsgBuf(&can_len, can_revbuf);    
+
+      canID_rev = CAN.getCanId();
+  
+      if(0x7E0 <= canID_rev && canID_rev <= 0x7EF)
       {
-        chk = 10;
+        Cal_CanrawData();
         
-        canID_rev = CAN.getCanId();
-        if(0x7E0 <= canID_rev && canID_rev <= 0x7EF)
-        {
-          Cal_CanrawData();
-          
-          Log_CanMsg();
-          
-          Read_CanData();
-        }
-        else
-        {
-          break;
-        }
-      
+        Log_CanMsg();
         
+        Read_CanData();
       }
-    
+
     }
     
   }
@@ -262,7 +252,7 @@ void ISR1()
   {
     cnt_CanSend = 0;
   }
-
+  
   switch(cnt_CanSend)
   {
     case 0:
@@ -288,6 +278,7 @@ void ISR1()
     default:
       break;
   }
+  
 }
 
 void Read_CanData()
