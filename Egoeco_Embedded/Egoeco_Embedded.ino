@@ -185,7 +185,7 @@ void loop() {
       {
         Cal_CanrawData();
         
-        Log_CanMsg();
+        //Log_CanMsg();
         
         Read_CanData();
       }
@@ -390,6 +390,12 @@ void Send_BTdata()
   bt_sendbuf[IDX_BT_RESERVED] = 0x00;
   bt_sendbuf[IDX_BT_CHKSUM] = CheckSum(bt_sendbuf, 6);
 
+  for(i = 0; i<BT_DATA_LEN; i++)    // print the data
+  {
+    Serial.print("\t");
+    Serial.print(bt_sendbuf[i], DEC);
+  }
+  Serial.println();
 
   for(i=0; i<BT_DATA_LEN; i++)
   {
