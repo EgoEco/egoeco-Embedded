@@ -20,7 +20,7 @@ const int ECO_RATE_VERY_GOOD  = 5;
 
 
 unsigned int ecoDrive_rpm_y[VS_RANGE] = // x1
-{0, 1200, 1250, 1250, 1500, 1500, 1800, 1900, 1800, 2000,
+{0, 1400, 1450, 1500, 1500, 1500, 1800, 1900, 1800, 2000,
 2100, 2200, 2300, 2400, 2500};
 
 unsigned int ecoDrive_vs_x[VS_RANGE] = // x1
@@ -29,11 +29,11 @@ unsigned int ecoDrive_vs_x[VS_RANGE] = // x1
 
 double ecoDrive_rateRange[VS_RANGE][4] = 
 { 
-  {0.8, 0.9, 1.1 , 1.2},  // 0
-  {0.8, 0.9, 1.1 , 1.2},  // 10
-  {0.8, 0.9, 1.1 , 1.2},  // 20
-  {0.8, 0.9, 1.1 , 1.2},  // 30
-  {0.8, 0.9, 1.1 , 1.2},  // 40
+  {0.8, 0.9, 1.1 , 1.3},  // 0
+  {0.8, 0.9, 1.1 , 1.3},  // 10
+  {0.8, 0.9, 1.1 , 1.3},  // 20
+  {0.8, 0.9, 1.1 , 1.3},  // 30
+  {0.8, 0.9, 1.1 , 1.3},  // 40
   {0.8, 0.9, 1.1 , 1.2},  // 50
   {0.8, 0.9, 1.1 , 1.2},  // 60
   {0.8, 0.9, 1.1 , 1.2},  // 70
@@ -377,6 +377,177 @@ void Log_CanMsg()
   
 }
 
+void Test_BTdata()
+{
+  static int i = 0;
+
+  switch(i)
+  {
+    case 0:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 12;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 9;
+      bt_sendbuf[IDX_BT_VS_SPD] = 0;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 3;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 146;
+      break;
+
+    case 1:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 12;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 42;
+      bt_sendbuf[IDX_BT_VS_SPD] = 1;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 3;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 112;
+      break;
+
+    case 2:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 14;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 19;
+      bt_sendbuf[IDX_BT_VS_SPD] = 3;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 3;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 131;
+      break;
+
+    case 3:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 17;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 78;
+      bt_sendbuf[IDX_BT_VS_SPD] = 4;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 3;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 68;
+      break;
+
+    case 4:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 18;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 220;
+      bt_sendbuf[IDX_BT_VS_SPD] = 7;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 3;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 178;
+      break;
+
+    case 5:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 20;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 22;
+      bt_sendbuf[IDX_BT_VS_SPD] = 9;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 3;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 116;
+      break;
+
+    case 6:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 19;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 251;
+      bt_sendbuf[IDX_BT_VS_SPD] = 11;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 3;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 142;
+      break;
+
+    case 7:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 21;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 126;
+      bt_sendbuf[IDX_BT_VS_SPD] = 12;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 2;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 9;
+      break;
+
+    case 8:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 23;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 101;
+      bt_sendbuf[IDX_BT_VS_SPD] = 14;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 1;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 31;
+      break;
+
+    case 9:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 23;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 181;
+      bt_sendbuf[IDX_BT_VS_SPD] = 15;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 1;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 206;
+      break;
+
+    case 10:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 22;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 43;
+      bt_sendbuf[IDX_BT_VS_SPD] = 16;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 2;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 87;
+      break;
+
+    case 11:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 22;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 43;
+      bt_sendbuf[IDX_BT_VS_SPD] = 18;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 2;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 85;
+      break;
+
+    case 12:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 23;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 97;
+      bt_sendbuf[IDX_BT_VS_SPD] = 19;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 1;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 30;
+      break;
+
+    case 13:
+      bt_sendbuf[IDX_BT_START_BYTE] = START_BYTE;
+      bt_sendbuf[IDX_BT_SEND_NUMBER] = SEND_NUM_1;
+      bt_sendbuf[IDX_BT_ENGRPM_A] = 24;
+      bt_sendbuf[IDX_BT_ENGRPM_B] = 60;
+      bt_sendbuf[IDX_BT_VS_SPD] = 21;
+      bt_sendbuf[IDX_BT_ECODRV_LV] = 1;
+      bt_sendbuf[IDX_BT_RESERVED] = 0x00;
+      bt_sendbuf[IDX_BT_CHKSUM] = 64;
+      break;
+  }
+
+  
+
+  i++;
+
+  if(14<=i)
+  {
+    i=0;
+  }
+}
+
 void Send_BTdata()
 {
   int i = 0;
@@ -389,6 +560,8 @@ void Send_BTdata()
   bt_sendbuf[IDX_BT_ECODRV_LV] = EcoRate;
   bt_sendbuf[IDX_BT_RESERVED] = 0x00;
   bt_sendbuf[IDX_BT_CHKSUM] = CheckSum(bt_sendbuf, 6);
+
+  //Test_BTdata();  // test
 
   for(i = 0; i<BT_DATA_LEN; i++)    // print the data
   {
